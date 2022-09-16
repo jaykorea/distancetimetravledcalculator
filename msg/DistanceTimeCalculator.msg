@@ -1,0 +1,6 @@
+
+float64 distance_remaining
+float64 arrival_time
+float64 distance_robot_traveled
+float64 remaining_distance_percentage
+uint8 status_info

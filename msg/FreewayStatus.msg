@@ -1,0 +1,3 @@
+
+float64 distance_remaining
+float64 arrival_time
