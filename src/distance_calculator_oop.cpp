@@ -157,12 +157,12 @@ int main(int argc, char **argv)
   move_base::DistanceTimeCalculator distancetimecalculator_msg;
 
   Distance_TimeCalculator Dt = Distance_TimeCalculator(&n);
+  distancetimecalculator_pub = n.advertise<move_base::DistanceTimeCalculator>("freeway/distancetimecalculator", 100);
 
   ros::Rate loop_rate(5);
 
   while (ros::ok())
   {
-    distancetimecalculator_pub = n.advertise<move_base::DistanceTimeCalculator>("freeway/distancetimecalculator", 10);
     // ros::master::V_TopicInfo master_topics;
     // ros::master::getTopics(master_topics);
 
@@ -170,7 +170,7 @@ int main(int argc, char **argv)
     //   const ros::master::TopicInfo& info = *it;
     //   std::cout << "topic_" << it - master_topics.begin() << ": " << info.name << std::endl;
     // }
-    if ((ros::Time::now().toSec() - Dt.move_base_GlobalPlanner_plan_Time) < 2.0) {Dt.status_flag=1; }
+    if ((ros::Time::now().toSec() - Dt.move_base_GlobalPlanner_plan_Time) < 2.0) { Dt.status_flag=1; }
     else { Dt.status_flag=0; Dt.remaining_time = 0.0; Dt.msg_global_path_distance=0.0; Dt.first_global_path_distance=0.0; Dt.traveled_distance=0.0; Dt.first_time=0; Dt.remaining_percentage=0.0; Dt.global_path_flag=false;}
     
 
