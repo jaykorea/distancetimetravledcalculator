@@ -26,6 +26,7 @@
 class Distance_TimeCalculator
 {
   public:
+  
     float total_vel = 0.0;
     int status_flag=0;
     int first_time=1; 
@@ -68,8 +69,9 @@ void get_velocity_cb(const geometry_msgs::Twist &cur_vel) {
   static uint counter_N1 = 1;
   float cur_x_vel = cur_vel.linear.x;
   float cur_y_vel = cur_vel.linear.y;
+  float cur_az_vel = cur_vel.angular.z;
 
-  total_vel = sqrt((cur_x_vel*cur_x_vel)+(cur_y_vel*cur_y_vel));
+  total_vel = sqrt((cur_x_vel*cur_x_vel)+(cur_y_vel*cur_y_vel)+(cur_az_vel*cur_az_vel));
   // ROS_INFO("current velocity : %f", total_vel);
   
   if (status_flag==1) {
@@ -179,6 +181,7 @@ int main(int argc, char **argv)
     distancetimecalculator_msg.distance_robot_traveled = Dt.traveled_distance;
     distancetimecalculator_msg.remaining_distance_percentage = Dt.remaining_percentage;
     distancetimecalculator_msg.status_info = Dt.status_info_;
+    
     distancetimecalculator_pub.publish(distancetimecalculator_msg);
     ros::spinOnce();
 
